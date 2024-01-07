@@ -6,7 +6,14 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint --cache \"./src/**/*.{ts,tsx,jsx,js}\" --max-warnings=0",
+    "lint:fix": "yarn lint --fix ",
+    "validate": "yarn prettier --check \"./src/**/*.{ts,tsx,js,jsx}\" && yarn lint ",
+    "format": "prettier --write \"./src/**/*.{ts,tsx,js,jsx}\"",
+    "format:test": "prettier --write \"./src/**/*.spec.{ts,tsx,js,jsx}\"",
+    "husky:install": "husky install",
+    "build:android:local": "eas build --platform android --local --profile preview"
   },
   "dependencies": {
     "expo": "~49.0.15",
@@ -18,8 +25,19 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.14",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "eslint": "^8.56.0",
+    "eslint-config-standard-with-typescript": "^43.0.0",
+    "eslint-config-universe": "^12.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-prettier": "^5.1.2",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.3",
+    "prettier": "^3.1.1",
     "tailwindcss": "3.3.2",
-    "typescript": "^5.1.3"
+    "typescript": "*"
   },
   "private": true
 }
