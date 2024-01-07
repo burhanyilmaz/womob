@@ -6,7 +6,7 @@ const TestScreen = () => (
   <SafeAreaView>
     <View className="px-4">
       <Text className={text({ type: 'title1', class: 'my-2' })}>Test Screen</Text>
-      <Button title="Press me!" />
+      <Button title="Get Your Website" />
     </View>
   </SafeAreaView>
 );

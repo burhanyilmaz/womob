@@ -4,6 +4,7 @@
     "strict": true,
     "baseUrl": "./src",
     "paths": {
+      "@hooks/*": ["./hooks/*"],
       "@theme/*": ["./theme/*"],
       "@screens/*":["./screens/*"],
       "@components/*": ["./components/*"],
