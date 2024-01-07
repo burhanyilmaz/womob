@@ -10,9 +10,10 @@ module.exports = function (api) {
         {
           root: ['./src'],
           alias: {
+            '@theme': './src/theme',
             '@screens': './src/screens',
             '@components': './src/components',
-            '@theme': './src/theme',
+            '@navigators': './src/navigators',
           },
         },
       ],

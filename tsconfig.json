@@ -4,9 +4,10 @@
     "strict": true,
     "baseUrl": "./src",
     "paths": {
+      "@theme/*": ["./theme/*"],
       "@screens/*":["./screens/*"],
       "@components/*": ["./components/*"],
-      "@theme/*": ["./theme/*"]
+      "@navigators/*": ["./navigators/*"]
     }
   }
 }
