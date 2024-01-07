@@ -16,6 +16,7 @@
     "build:android:local": "eas build --platform android --local --profile preview"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.0",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
     "expo-updates": "~0.18.19",
