@@ -1,0 +1,40 @@
+name: WoMob Github Action
+run-name: ${{ github.actor }} is testing out Github Actions 🚀
+on: [push]
+jobs:
+  Create-Upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: yarn
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}    
+      - name: 🚀 Install Packages
+        run: |
+         yarn install
+      - name: 🧪 Run format and lint
+        run: |
+         yarn format && yarn validate
+      - name: Build apk
+        run: |
+         yarn build:android:local  
+      - name: 🥳 Upload APK File
+        uses: actions/upload-artifact@v3
+        with:
+          name: womob-apk
+          path: ${{ github.workspace }}/*.apk 
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+
