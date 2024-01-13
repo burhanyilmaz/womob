@@ -1,36 +1,43 @@
+import { welcomeScreenBg } from '@components/Images';
+import Logo from '@components/Logo';
 import Button from '@components/core/Button';
 import Input from '@components/core/Input';
+import { MainNavigatorParamList } from '@navigators/MainNavigator';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import postStore from '@store/PostStore';
 import { text } from '@theme/text';
-import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { observer } from 'mobx-react-lite';
+import { ImageBackground, Text, View } from 'react-native';
 
 const WelcomeScreen = () => {
-  const [wordpressSite, setWordpressSiteUrl] = useState('https://blog.ted.com/');
+  const { navigate } = useNavigation<NavigationProp<MainNavigatorParamList>>();
+
+  const onConvertWpIntoMobile = () => {
+    postStore.getPosts();
+    navigate('BlogSplash');
+  };
 
   return (
-    <View className="flex-1 items-center justify-center px-5 bg-white">
+    <ImageBackground
+      source={welcomeScreenBg}
+      className="flex-1 items-center justify-center px-5 bg-white">
       <View className="mb-10 items-center">
-        <View className="flex-row">
-          <Text className="text-zinc-700 text-[28px] font-Bold">Wo</Text>
-          <View className="bg-zinc-900 rounded-md">
-            <Text className="text-white text-[28px] font-Bold mx-2">Mob</Text>
-          </View>
-        </View>
+        <Logo parts={['Wo', 'Mob']} />
         <Text className={text({ type: 'subtitle', class: 'opacity-60 text-zinc-900 mt-1' })}>
-          Wordpress to Mobile App
+          WordPress to Mobile App
         </Text>
       </View>
       <View className="w-full">
         <Input
-          value={wordpressSite}
+          value={postStore.url}
           containerClass="w-full mb-4"
-          onChangeText={setWordpressSiteUrl}
+          onChangeText={postStore.setUrl}
           placeholder="Type your wordpress site link"
         />
-        <Button title="Convert Wordpress into Mobile" />
+        <Button title="Convert Wordpress into Mobile" onPress={onConvertWpIntoMobile} />
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
-export default WelcomeScreen;
+export default observer(WelcomeScreen);

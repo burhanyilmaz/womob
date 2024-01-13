@@ -26,5 +26,9 @@ export const text = cva(['items-center justify-center'], {
     isCenter: {
       true: 'text-center',
     },
+    tabTitleIsActive: {
+      true: 'font-Medium text-[12px] text-zinc-900',
+      false: 'font-Regular text-[12px] text-zinc-400',
+    },
   },
 });

@@ -5,7 +5,7 @@ module.exports = {
     '@typescript-eslint/no-shadow': ['error'],
     'no-shadow': 'off',
     'no-undef': 'off',
-    indent: ['error', 2],
+    indent: ['error', 2, { SwitchCase: 1 }],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'no-console': ['error'],
@@ -19,6 +19,11 @@ module.exports = {
     'eslint-disable-next-line': 'off',
     'prettier/prettier': 'error',
     'import/newline-after-import': ['error'],
-    'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'export' }],
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'export' },
+    ],
+    'react/jsx-indent': ['error', 2],
+    'react/jsx-indent-props': ['error', 2],
   },
 };

@@ -4,9 +4,14 @@
     "strict": true,
     "baseUrl": "./src",
     "paths": {
+      "@types/*": ["./types/*"],
+      "@utils/*": ["./utils/*"],
+      "@store/*": ["./store/*"],
       "@hooks/*": ["./hooks/*"],
       "@theme/*": ["./theme/*"],
       "@screens/*":["./screens/*"],
+      "@services/*":["./services/*"],
+      "@containers/*":["./containers/*"],
       "@components/*": ["./components/*"],
       "@navigators/*": ["./navigators/*"]
     }
