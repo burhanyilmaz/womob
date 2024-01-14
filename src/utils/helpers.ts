@@ -42,3 +42,30 @@ export function removeHtmlAndDecimalEntities(value: string) {
     return value;
   }
 }
+
+export const convertUrl = (url: string) => {
+  let convertedUrl = url;
+
+  if (!convertedUrl.startsWith('https://')) {
+    convertedUrl = 'https://' + convertedUrl;
+  }
+
+  if (!convertedUrl.endsWith('/')) {
+    convertedUrl = convertedUrl + '/';
+  }
+
+  return convertedUrl;
+};
+
+export const checkUrlIsValid = (url: string) => {
+  if (!url) {
+    return false;
+  }
+
+  const expression =
+    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+
+  const urlRegex = new RegExp(expression);
+
+  return !!url.match(urlRegex)?.length;
+};

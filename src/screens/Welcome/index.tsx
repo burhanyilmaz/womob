@@ -4,17 +4,36 @@ import Button from '@components/core/Button';
 import Input from '@components/core/Input';
 import { MainNavigatorParamList } from '@navigators/MainNavigator';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { api } from '@services/Api';
 import postStore from '@store/PostStore';
 import { text } from '@theme/text';
+import { checkUrlIsValid, convertUrl } from '@utils/helpers';
 import { observer } from 'mobx-react-lite';
-import { ImageBackground, Text, View } from 'react-native';
+import { Alert, ImageBackground, Text, View } from 'react-native';
 
 const WelcomeScreen = () => {
   const { navigate } = useNavigation<NavigationProp<MainNavigatorParamList>>();
 
   const onConvertWpIntoMobile = () => {
-    postStore.getPosts();
-    navigate('BlogSplash');
+    const url = convertUrl(postStore.url);
+
+    if (!checkUrlIsValid(url)) {
+      Alert.alert(`"${postStore.url}" is not valid website url.`);
+
+      return;
+    }
+
+    postStore.setUrl(url);
+    api.createApiInstance(url);
+
+    postStore.getPosts().then(post => {
+      if (!post?.length) {
+        Alert.alert('Warning', 'Your website may not wordpress.');
+
+        return;
+      }
+      navigate('BlogSplash');
+    });
   };
 
   return (
@@ -34,7 +53,11 @@ const WelcomeScreen = () => {
           onChangeText={postStore.setUrl}
           placeholder="Type your wordpress site link"
         />
-        <Button title="Convert Wordpress into Mobile" onPress={onConvertWpIntoMobile} />
+        <Button
+          isLoading={postStore.loading}
+          onPress={onConvertWpIntoMobile}
+          title="Convert Wordpress into Mobile"
+        />
       </View>
     </ImageBackground>
   );

@@ -5,11 +5,11 @@ import { Instance, flow, t } from 'mobx-state-tree';
 
 const Post = t
   .model({
-    id: t.identifier,
     title: t.string,
-    category: t.maybe(t.string),
+    id: t.identifier,
     mediaUrl: t.string,
     image: t.maybe(t.string),
+    category: t.maybe(t.string),
     imageLoaded: t.maybe(t.boolean),
   })
   .actions(self => ({
@@ -84,13 +84,21 @@ const PostStore = t
         return;
       }
       this.setLoading(true);
-      const posts = await api.getPost(self.page);
+      try {
+        const posts = await api.getPost(self.page);
 
-      if (posts?.length > 0) {
-        posts.forEach(this.addPost);
+        if (posts?.length > 0) {
+          posts.forEach(this.addPost);
+        }
+
+        this.setLoading(false);
+
+        return posts;
+      } catch {
+        this.setLoading(false);
+
+        return [];
       }
-
-      this.setLoading(false);
     },
 
     afterCreate() {
@@ -108,7 +116,7 @@ const PostStore = t
   }));
 
 const postStore = PostStore.create({
-  page: 0,
+  page: 1,
   url: 'https://techcrunch.com/',
 });
 
