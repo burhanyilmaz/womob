@@ -5,6 +5,10 @@ import { Pressable } from 'react-native';
 const BlogTabHeaderGoBack = () => {
   const { dispatch } = useNavigation();
 
+  if (!__DEV__) {
+    return null;
+  }
+
   return (
     <Pressable className="ml-5" onPress={() => dispatch(StackActions.popToTop)}>
       <ArrowLeft className="text-zinc-800" />

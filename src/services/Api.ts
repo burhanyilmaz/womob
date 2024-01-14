@@ -14,7 +14,16 @@ class API {
 
   getPost(pagination: number): Promise<ApiPostType[]> {
     return this.instance
-      .url(`wp-json/wp/v2/posts?order_by=date&per_page=6&page=${pagination || 1}`)
+      .url(`wp-json/wp/v2/posts?order_by=date&per_page=12&page=${pagination || 1}`)
+      .get()
+      .json(result => result);
+  }
+
+  searchPost(term: string): Promise<ApiPostType[]> {
+    return this.instance
+      .url(
+        `wp-json/wp/v2/posts?search=${term}&orderby=relevance&per_page=50&search_columns=post_title`,
+      )
       .get()
       .json(result => result);
   }

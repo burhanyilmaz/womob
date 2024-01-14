@@ -1,5 +1,6 @@
 import Post from '@containers/Post';
 import postStore, { PostType } from '@store/PostStore';
+import colors from '@theme/colors';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { ActivityIndicator, FlatList, ListRenderItem, View } from 'react-native';
@@ -19,7 +20,11 @@ const BlogHomeScreen = () => {
   return (
     <View className="bg-white  flex-1">
       {postStore.loading && posts.length > 0 && (
-        <ActivityIndicator size="large" className="absolute z-50 right-0 left-0 bottom-4" />
+        <ActivityIndicator
+          size="large"
+          color={colors.zinc[600]}
+          className="absolute z-50 right-0 left-0 bottom-4"
+        />
       )}
       <FlatList
         data={posts}
@@ -30,7 +35,7 @@ const BlogHomeScreen = () => {
         maxToRenderPerBatch={6}
         renderItem={RenderItem}
         onEndReached={postStore.increasePage}
-        ListEmptyComponent={<ActivityIndicator />}
+        ListEmptyComponent={<ActivityIndicator size="large" color={colors.zinc[600]} />}
       />
     </View>
   );

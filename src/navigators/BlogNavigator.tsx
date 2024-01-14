@@ -4,6 +4,7 @@ import BlogTabHeaderTitle from '@components/BlogTabHeader/BlogTabHeaderTitle';
 import BottomTab from '@components/BottomTab';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ExploreScreen from '@screens/Blog/ExploreScreen';
 import BlogHomeScreen from '@screens/Blog/HomeScreen';
 import TestScreen from '@screens/Test';
 
@@ -33,7 +34,7 @@ const BlogTab = () => (
       headerTitle: props => <BlogTabHeaderTitle title={props.children} />,
     }}>
     <Tab.Screen name="Home" component={BlogHomeScreen} />
-    <Tab.Screen name="Explore" component={TestScreen} />
+    <Tab.Screen name="Explore" component={ExploreScreen} />
     <Tab.Screen name="Saved" component={TestScreen} />
   </Tab.Navigator>
 );

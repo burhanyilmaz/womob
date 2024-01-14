@@ -49,10 +49,11 @@ const WelcomeScreen = () => {
       <View className="w-full">
         <Input
           value={postStore.url}
-          containerClass="w-full mb-4"
+          containerClass="w-full"
           onChangeText={postStore.setUrl}
           placeholder="Type your wordpress site link"
         />
+        <View className="h-4" />
         <Button
           isLoading={postStore.loading}
           onPress={onConvertWpIntoMobile}

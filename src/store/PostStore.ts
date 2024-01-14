@@ -3,8 +3,8 @@ import { removeHtmlAndDecimalEntities } from '@utils/helpers';
 import { ApiPostType } from '@utils/types/BlogTypes';
 import { Instance, flow, t } from 'mobx-state-tree';
 
-const Post = t
-  .model({
+export const Post = t
+  .model('Post', {
     title: t.string,
     id: t.identifier,
     mediaUrl: t.string,
@@ -42,7 +42,7 @@ const Post = t
   }));
 
 const PostStore = t
-  .model({
+  .model('PostStore', {
     url: t.string,
     page: t.number,
     posts: t.map(Post),
