@@ -15,18 +15,10 @@ const Stack = createNativeStackNavigator<MainNavigatorParamList>();
 
 const MainNavigator = () => (
   <NavigationContainer>
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen
-        name="BlogSplash"
-        component={BlogSplashScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Blog"
-        component={BlogNavigator}
-        options={{ animation: 'slide_from_right' }}
-      />
+      <Stack.Screen name="BlogSplash" component={BlogSplashScreen} />
+      <Stack.Screen name="Blog" component={BlogNavigator} />
     </Stack.Navigator>
   </NavigationContainer>
 );
