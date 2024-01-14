@@ -15,9 +15,9 @@ const CARD_IMAGE_WIDTH = (width - 40) * 0.3;
 const CARD_IMAGE_HEIGHT = (width - 40) * 0.35;
 
 type Props = {
-  image: string;
   title: string;
-  category: string;
+  image?: string;
+  category?: string;
   onPressPost: () => void;
   onPressSave: () => void;
 };

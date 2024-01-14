@@ -6,8 +6,9 @@ const Post = ({ post }: { post: PostType }) => (
   <PostCard
     image={post.image}
     title={post.title}
-    onPressPost={() => null}
+    onPressSave={() => null}
     category={post.category}
+    onPressPost={() => null}
   />
 );
 
