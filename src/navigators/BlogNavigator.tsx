@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ExploreScreen from '@screens/Blog/ExploreScreen';
 import BlogHomeScreen from '@screens/Blog/HomeScreen';
-import TestScreen from '@screens/Test';
+import SavedScreen from '@screens/Blog/SavedScreen';
 
 export type BlogTabNavigatorParamList = {
   Home: undefined;
@@ -35,7 +35,7 @@ const BlogTab = () => (
     }}>
     <Tab.Screen name="Home" component={BlogHomeScreen} />
     <Tab.Screen name="Explore" component={ExploreScreen} />
-    <Tab.Screen name="Saved" component={TestScreen} />
+    <Tab.Screen name="Saved" component={SavedScreen} />
   </Tab.Navigator>
 );
 
