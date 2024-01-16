@@ -11,7 +11,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-          cache: yarn
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
         with:
@@ -19,13 +18,13 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}    
       - name: 🚀 Install Packages
         run: |
-         yarn install
+         bun install
       - name: 🧪 Run format and lint
         run: |
-         yarn format && yarn validate
+         bun format && bun validate
       - name: Build apk
         run: |
-         yarn build:android:local  
+         bun build:android:local  
       - name: 🥳 Upload APK File
         uses: actions/upload-artifact@v3
         with:
