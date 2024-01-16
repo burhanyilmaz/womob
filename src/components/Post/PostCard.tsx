@@ -1,3 +1,4 @@
+import colors from '@theme/colors';
 import { text } from '@theme/text';
 import { width } from '@utils/helpers';
 import { Bookmark } from 'lucide-react-native';
@@ -18,11 +19,12 @@ type Props = {
   title?: string;
   image?: string;
   category?: string;
+  isSaved?: boolean;
   onPressPost: () => void;
   onPressSave: () => void;
 };
 
-const PostCard = ({ image, title, category, onPressPost, onPressSave }: Props) => (
+const PostCard = ({ image, title, isSaved, category, onPressPost, onPressSave }: Props) => (
   <Pressable
     onPress={onPressPost}
     style={{ minHeight: 120 }}
@@ -47,7 +49,7 @@ const PostCard = ({ image, title, category, onPressPost, onPressSave }: Props) =
       </View>
       <View className="bottom-0 left-0 w-full self-center justify-center items-end">
         <TouchableOpacity onPress={onPressSave}>
-          <Bookmark className="text-zinc-300" />
+          <Bookmark className="text-zinc-300" fill={isSaved ? colors.zinc[300] : 'transparent'} />
         </TouchableOpacity>
       </View>
     </View>

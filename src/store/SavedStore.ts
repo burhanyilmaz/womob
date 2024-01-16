@@ -11,6 +11,15 @@ const SavedStore = t
       return Array.from(self.saved.values());
     },
   }))
+  .views(self => ({
+    isSavedPost(postId: string) {
+      if (!postId) {
+        return false;
+      }
+
+      return !!self.saved.get(postId);
+    },
+  }))
   .actions(self => ({
     addPost: (post: PostType) => {
       const savedPost = self.saved.get(post.id);

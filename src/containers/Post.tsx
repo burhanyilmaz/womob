@@ -9,6 +9,7 @@ const Post = ({ post }: { post: PostType }) => (
     title={post.title}
     category={post.category}
     onPressPost={() => null}
+    isSaved={savedStore.isSavedPost(post.id)}
     onPressSave={() => savedStore.addPost(post)}
   />
 );
