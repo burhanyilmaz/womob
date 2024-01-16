@@ -16,6 +16,9 @@ export type ApiPostType = {
   title: {
     rendered: string;
   };
+  content: {
+    rendered: string;
+  };
   primary_category: {
     name?: string;
   };

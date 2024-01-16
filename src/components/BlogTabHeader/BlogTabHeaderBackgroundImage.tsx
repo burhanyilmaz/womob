@@ -4,7 +4,7 @@ import { Image, StyleSheet } from 'react-native';
 const BlogTabHeaderBackgroundImage = () => (
   <Image
     resizeMode="cover"
-    className="bg-zinc-50"
+    className="bg-zinc-100"
     source={{ uri: blogHeaderBg }}
     style={StyleSheet.absoluteFill}
   />

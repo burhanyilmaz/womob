@@ -22,6 +22,7 @@ const SearchStore = t
         post.id,
         Post.create({
           id: post.id.toString(),
+          content: post.content.rendered,
           mediaUrl: post?._links?.['wp:featuredmedia']?.[0]?.href || '',
           title: removeHtmlAndDecimalEntities(post?.title?.rendered || ''),
           category: removeHtmlAndDecimalEntities(post?.primary_category?.name || ''),

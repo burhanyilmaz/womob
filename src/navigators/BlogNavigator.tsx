@@ -6,7 +6,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ExploreScreen from '@screens/Blog/ExploreScreen';
 import BlogHomeScreen from '@screens/Blog/HomeScreen';
+import PostDetailScreen from '@screens/Blog/PostDetailScreen';
 import SavedScreen from '@screens/Blog/SavedScreen';
+import { PostType } from '@store/PostStore';
 
 export type BlogTabNavigatorParamList = {
   Home: undefined;
@@ -17,7 +19,9 @@ export type BlogTabNavigatorParamList = {
 
 export type BlogStackNavigatorParamList = {
   BlogTab: undefined;
-  PostDetails: undefined;
+  PostDetail: {
+    post: PostType;
+  };
 };
 
 const Tab = createBottomTabNavigator<BlogTabNavigatorParamList>();
@@ -42,7 +46,11 @@ const BlogTab = () => (
 const BlogNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="BlogTab" component={BlogTab} />
-    <Stack.Screen name="PostDetails" component={BlogTab} />
+    <Stack.Screen
+      name="PostDetail"
+      component={PostDetailScreen}
+      options={{ animation: 'slide_from_right' }}
+    />
   </Stack.Navigator>
 );
 

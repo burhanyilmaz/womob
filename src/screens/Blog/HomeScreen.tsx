@@ -1,4 +1,6 @@
 import Post from '@containers/Post';
+import { BlogStackNavigatorParamList } from '@navigators/BlogNavigator';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import postStore, { PostType } from '@store/PostStore';
 import colors from '@theme/colors';
 import { observer } from 'mobx-react-lite';
@@ -6,6 +8,7 @@ import { useEffect } from 'react';
 import { ActivityIndicator, FlatList, ListRenderItem, View } from 'react-native';
 
 const BlogHomeScreen = () => {
+  const { navigate } = useNavigation<NavigationProp<BlogStackNavigatorParamList>>();
   const posts = Array.from(postStore.posts.values());
 
   useEffect(
@@ -15,7 +18,9 @@ const BlogHomeScreen = () => {
     [],
   );
 
-  const RenderItem: ListRenderItem<PostType> = ({ item }) => <Post post={item} />;
+  const RenderItem: ListRenderItem<PostType> = ({ item: post }) => (
+    <Post post={post} onPressPost={() => navigate('PostDetail', { post })} />
+  );
 
   return (
     <View className="bg-white  flex-1">

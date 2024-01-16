@@ -1,16 +1,27 @@
 import Input from '@components/core/Input';
 import Post from '@containers/Post';
 import useDebounce from '@hooks/useDebounce';
+import { BlogStackNavigatorParamList } from '@navigators/BlogNavigator';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { PostType } from '@store/PostStore';
 import searchStore from '@store/SearchStore';
 import colors from '@theme/colors';
 import { text } from '@theme/text';
 import { BookText, Search } from 'lucide-react-native';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
-import { ActivityIndicator, FlatList, SafeAreaView, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 
 const ExploreScreen = () => {
   const value = useDebounce(searchStore.term, 300);
+  const { navigate } = useNavigation<NavigationProp<BlogStackNavigatorParamList>>();
 
   useEffect(() => {
     if (value.length > 2) {
@@ -18,11 +29,23 @@ const ExploreScreen = () => {
     }
   }, [value]);
 
-  const ListEmpty = () => (
-    <View className="items-center mt-4">
-      <BookText className="text-zinc-500 mb-2" size={28} />
-      <Text className={text({ type: 'subtitle', class: 'text-zinc-600' })}>There is no posts.</Text>
-    </View>
+  const ListEmpty = () => {
+    if (!searchStore.loading && searchStore.term) {
+      return (
+        <View className="items-center mt-4">
+          <BookText className="text-zinc-500 mb-2" size={28} />
+          <Text className={text({ type: 'subtitle', class: 'text-zinc-600' })}>
+            There is no posts.
+          </Text>
+        </View>
+      );
+    }
+
+    return null;
+  };
+
+  const RenderItem: ListRenderItem<PostType> = ({ item: post }) => (
+    <Post post={post} onPressPost={() => navigate('PostDetail', { post })} />
   );
 
   return (
@@ -47,9 +70,9 @@ const ExploreScreen = () => {
         removeClippedSubviews
         initialNumToRender={6}
         maxToRenderPerBatch={6}
+        renderItem={RenderItem}
+        ListEmptyComponent={ListEmpty}
         data={searchStore.listResult || []}
-        renderItem={({ item }) => <Post post={item} />}
-        ListEmptyComponent={!searchStore.loading && searchStore.term ? ListEmpty : null}
       />
     </SafeAreaView>
   );

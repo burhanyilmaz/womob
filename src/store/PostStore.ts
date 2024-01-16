@@ -7,9 +7,11 @@ export const Post = t
   .model('Post', {
     title: t.string,
     id: t.identifier,
+    content: t.string,
     mediaUrl: t.string,
     image: t.maybe(t.string),
     category: t.maybe(t.string),
+    headerImage: t.maybe(t.string),
     imageLoaded: t.maybe(t.boolean),
   })
   .actions(self => ({
@@ -21,6 +23,7 @@ export const Post = t
       const media = yield api.getMediaByUrl(self.mediaUrl);
 
       self.image = media?.media_details?.sizes?.medium?.source_url || media?.guid?.rendered;
+      self.headerImage = media?.guid?.rendered;
       self.imageLoaded = true;
     }),
 
@@ -52,6 +55,9 @@ const PostStore = t
     get fetchPosts() {
       return Array.from(self.posts.values());
     },
+    getSelectedPost(id: string) {
+      return self.posts.get(id);
+    },
   }))
   .actions(self => ({
     setUrl: (url: string) => {
@@ -68,6 +74,7 @@ const PostStore = t
         post.id,
         Post.create({
           id: post.id.toString(),
+          content: post.content.rendered,
           mediaUrl: post?._links?.['wp:featuredmedia']?.[0]?.href || '',
           title: removeHtmlAndDecimalEntities(post?.title?.rendered || ''),
           category: removeHtmlAndDecimalEntities(post?.primary_category?.name || ''),

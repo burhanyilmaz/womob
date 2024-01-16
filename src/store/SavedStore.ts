@@ -32,10 +32,11 @@ const SavedStore = t
         post.id,
         Post.create({
           id: post.id,
-          mediaUrl: post.mediaUrl,
           title: post.title,
-          category: post.category,
           image: post.image,
+          content: post.content,
+          mediaUrl: post.mediaUrl,
+          category: post.category,
           imageLoaded: post.imageLoaded,
         }),
       );
