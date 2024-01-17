@@ -1,7 +1,7 @@
 import IframeRenderer, { iframeModel } from '@native-html/iframe-plugin';
 import colors from '@theme/colors';
 import { width } from '@utils/helpers';
-import { observer } from 'mobx-react-lite';
+import { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 import { WebView } from 'react-native-webview';
@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(HtmlToNativeViewer);
+export default memo(HtmlToNativeViewer);

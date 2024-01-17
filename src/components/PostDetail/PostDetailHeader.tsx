@@ -36,7 +36,7 @@ const PostDetailHeader = ({
 
 const styles = StyleSheet.create({
   header: {
-    height: width * 0.6,
+    height: width * 0.9,
   },
 });
 

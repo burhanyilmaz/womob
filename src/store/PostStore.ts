@@ -23,7 +23,7 @@ export const Post = t
       const media = yield api.getMediaByUrl(self.mediaUrl);
 
       self.image = media?.media_details?.sizes?.medium?.source_url || media?.guid?.rendered;
-      self.headerImage = media?.guid?.rendered;
+      self.headerImage = media?.media_details?.sizes?.large?.source_url || media?.guid?.rendered;
       self.imageLoaded = true;
     }),
 
