@@ -11,6 +11,7 @@ export const Post = t
     mediaUrl: t.string,
     image: t.maybe(t.string),
     category: t.maybe(t.string),
+    categories: t.array(t.string),
     headerImage: t.maybe(t.string),
     imageLoaded: t.maybe(t.boolean),
   })
@@ -40,7 +41,6 @@ export const Post = t
 
     async afterCreate() {
       this.fetchMedia();
-      this.fetchCategory();
     },
   }));
 
@@ -78,6 +78,7 @@ const PostStore = t
           mediaUrl: post?._links?.['wp:featuredmedia']?.[0]?.href || '',
           title: removeHtmlAndDecimalEntities(post?.title?.rendered || ''),
           category: removeHtmlAndDecimalEntities(post?.primary_category?.name || ''),
+          categories: post.categories?.slice(0, 2).map(category => category.toString()),
         }),
       );
     },

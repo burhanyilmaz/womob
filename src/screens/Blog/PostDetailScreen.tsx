@@ -2,6 +2,7 @@ import HtmlToNativeViewer from '@components/HtmlToNativeViewer';
 import PostDetailHeader from '@components/PostDetail/PostDetailHeader';
 import { BlogStackNavigatorParamList } from '@navigators/BlogNavigator';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import categoryStore from '@store/CategoryStore';
 import savedStore from '@store/SavedStore';
 import { text } from '@theme/text';
 import { width } from '@utils/helpers';
@@ -59,7 +60,7 @@ const PostDetailScreen = () => {
         style={[{ marginTop: scrollableContentMarginTop }, animatedStyle]}>
         <View renderToHardwareTextureAndroid className="px-5 pb-8">
           <Text className={text({ type: 'subhead', class: 'text-zinc-500 mt-4 mb-1' })}>
-            {post?.category}
+            {post?.category || categoryStore.categoryName(post.categories)}
           </Text>
           <Text numberOfLines={3} className={text({ type: 'title4', class: 'text-zinc-900 mb-2' })}>
             {post?.title}

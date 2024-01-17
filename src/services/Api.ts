@@ -35,6 +35,13 @@ class API {
       .json(result => result);
   }
 
+  getAllCategories(): Promise<CategoryType[]> {
+    return this.instance
+      .url('wp-json/wp/v2/categories?per_page=100')
+      .get()
+      .json(result => result);
+  }
+
   getMediaByUrl(mediaUrl: string): Promise<MediaType> {
     return fetch(mediaUrl).then(response => response.json());
   }

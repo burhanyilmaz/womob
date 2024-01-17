@@ -1,6 +1,7 @@
 import Logo from '@components/Logo';
 import { MainNavigatorParamList } from '@navigators/MainNavigator';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import categoryStore from '@store/CategoryStore';
 import { useEffect } from 'react';
 import { View } from 'react-native';
 
@@ -8,9 +9,11 @@ const BlogSplashScreen = () => {
   const { navigate } = useNavigation<NavigationProp<MainNavigatorParamList>>();
 
   useEffect(() => {
+    categoryStore.getCategories();
+
     setTimeout(() => {
       navigate('Blog');
-    }, 10);
+    }, 1000);
   }, []);
 
   return (
