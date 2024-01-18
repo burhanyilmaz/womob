@@ -61,10 +61,6 @@ const PostStore = t
   }))
   .actions(self => ({
     setUrl: (url: string) => {
-      if (!url) {
-        return;
-      }
-
       api.createApiInstance(url);
       self.url = url;
     },
@@ -127,7 +123,7 @@ const PostStore = t
 
 const postStore = PostStore.create({
   page: 1,
-  url: 'https://techcrunch.com/',
+  url: '',
 });
 
 export default postStore;
