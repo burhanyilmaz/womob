@@ -26,8 +26,8 @@ const WelcomeScreen = () => {
       return;
     }
 
-    postStore.setUrl(url);
-    api.createApiInstance(url);
+    postStore.setUrl(url.trim());
+    api.createApiInstance(url.trim());
 
     postStore.getPosts().then(post => {
       if (!post?.length) {
@@ -72,7 +72,7 @@ const WelcomeScreen = () => {
       <ExampleWpSites
         visible={exampleWpSitesModalVisible}
         onPressExampleWebsite={url => {
-          postStore.setUrl(url);
+          postStore.setUrl(url.trim());
           setExampleWpSitesModalVisible(false);
           onConvertWpIntoMobile();
         }}
