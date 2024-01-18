@@ -26,7 +26,7 @@ export const ExampleWPWebsites = [
     name: 'Fortune',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/FORTUNE-LOGO-2016.png/320px-FORTUNE-LOGO-2016.png',
-    url: 'https://fortune.com/ ',
+    url: 'https://fortune.com/',
   },
   {
     id: 5,

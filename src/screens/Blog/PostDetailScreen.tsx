@@ -4,10 +4,12 @@ import { BlogStackNavigatorParamList } from '@navigators/BlogNavigator';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import categoryStore from '@store/CategoryStore';
 import savedStore from '@store/SavedStore';
+import colors from '@theme/colors';
 import { text } from '@theme/text';
 import { width } from '@utils/helpers';
 import { observer } from 'mobx-react-lite';
-import { Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, InteractionManager, Text, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -27,6 +29,7 @@ const PostDetailScreen = () => {
   const { goBack } = useNavigation();
   const { top } = useSafeAreaInsets();
   const scrollY = useSharedValue(0);
+  const [showContent, setShowContent] = useState(false);
   const scrollableContentMarginTop = CONTENT_MARGIN_TOP + top;
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -44,6 +47,14 @@ const PostDetailScreen = () => {
 
   const onPressSave = () => post && savedStore.addPost(post);
 
+  useEffect(() => {
+    InteractionManager.runAfterInteractions(() => {
+      setTimeout(() => {
+        setShowContent(true);
+      }, 300);
+    });
+  }, []);
+
   return (
     <View className="bg-zinc-50 flex-1">
       <PostDetailHeader
@@ -53,20 +64,27 @@ const PostDetailScreen = () => {
         headerImage={post?.headerImage}
         isSavedPost={savedStore.isSavedPost(post.id)}
       />
+
       <Animated.ScrollView
         scrollEventThrottle={16}
         onScroll={scrollHandler}
         className="rounded-md bg-zinc-50"
         style={[{ marginTop: scrollableContentMarginTop }, animatedStyle]}>
-        <View renderToHardwareTextureAndroid className="px-5 pb-8">
-          <Text className={text({ type: 'subhead', class: 'text-zinc-500 mt-4 mb-1' })}>
-            {post?.category || categoryStore.categoryName(post.categories)}
-          </Text>
-          <Text numberOfLines={3} className={text({ type: 'title4', class: 'text-zinc-900 mb-2' })}>
-            {post?.title}
-          </Text>
-          <HtmlToNativeViewer html={post?.content} />
-        </View>
+        {showContent ? (
+          <View renderToHardwareTextureAndroid className="px-5 pb-8">
+            <Text className={text({ type: 'subhead', class: 'text-zinc-500 mt-4 mb-1' })}>
+              {post?.category || categoryStore.categoryName(post.categories)}
+            </Text>
+            <Text
+              numberOfLines={3}
+              className={text({ type: 'title4', class: 'text-zinc-900 mb-2' })}>
+              {post?.title}
+            </Text>
+            <HtmlToNativeViewer html={post?.content} />
+          </View>
+        ) : (
+          <ActivityIndicator color={colors.zinc[800]} className="mt-4" />
+        )}
       </Animated.ScrollView>
     </View>
   );
