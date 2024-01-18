@@ -1,3 +1,4 @@
+import ExampleWpSites from '@components/ExampleWpSites';
 import { welcomeScreenBg } from '@components/Images';
 import Logo from '@components/Logo';
 import Button from '@components/core/Button';
@@ -9,9 +10,11 @@ import postStore from '@store/PostStore';
 import { text } from '@theme/text';
 import { checkUrlIsValid, convertUrl } from '@utils/helpers';
 import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
 import { Alert, ImageBackground, Text, View } from 'react-native';
 
 const WelcomeScreen = () => {
+  const [exampleWpSitesModalVisible, setExampleWpSitesModalVisible] = useState(false);
   const { navigate } = useNavigation<NavigationProp<MainNavigatorParamList>>();
 
   const onConvertWpIntoMobile = () => {
@@ -59,7 +62,22 @@ const WelcomeScreen = () => {
           onPress={onConvertWpIntoMobile}
           title="Convert Wordpress into Mobile"
         />
+        <View className="h-4" />
+        <Button
+          variant="outline"
+          title="Show Example Websites"
+          onPress={() => setExampleWpSitesModalVisible(true)}
+        />
       </View>
+      <ExampleWpSites
+        visible={exampleWpSitesModalVisible}
+        onPressExampleWebsite={url => {
+          postStore.setUrl(url);
+          setExampleWpSitesModalVisible(false);
+          onConvertWpIntoMobile();
+        }}
+        onClose={() => setExampleWpSitesModalVisible(false)}
+      />
     </ImageBackground>
   );
 };

@@ -25,7 +25,12 @@ const CategoryStore = t
   .actions(self => ({
     async getCategories() {
       const categories = await api.getAllCategories();
-      categories.forEach(this.addCategory);
+      if (!categories.length) {
+        const sections = await api.getAllSections();
+        sections.forEach(this.addCategory);
+      } else {
+        categories.forEach(this.addCategory);
+      }
     },
 
     addCategory: (category: CategoryType) => {

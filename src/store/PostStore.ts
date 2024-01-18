@@ -78,7 +78,9 @@ const PostStore = t
           mediaUrl: post?._links?.['wp:featuredmedia']?.[0]?.href || '',
           title: removeHtmlAndDecimalEntities(post?.title?.rendered || ''),
           category: removeHtmlAndDecimalEntities(post?.primary_category?.name || ''),
-          categories: post.categories?.slice(0, 2).map(category => category.toString()),
+          categories: (post.categories || post.section)
+            ?.slice(0, 2)
+            .map(category => category.toString()),
         }),
       );
     },

@@ -20,6 +20,7 @@ export type ApiPostType = {
     rendered: string;
   };
   categories: number[];
+  section: number[];
   primary_category: {
     name?: string;
   };

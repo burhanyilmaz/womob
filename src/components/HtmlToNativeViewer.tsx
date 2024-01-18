@@ -44,9 +44,20 @@ const HtmlToNativeViewer = ({ html, customContentWidth }: Props) => {
     />
   );
 };
-
 const styles = StyleSheet.create({
   a: {},
+  blockquote: {
+    padding: 0,
+    textAlign: 'left',
+    left: (-1 * (width * 54)) / 852,
+  },
+  figcaption: {
+    margin: 0,
+    padding: 0,
+    textAlign: 'left',
+    left: (-1 * (width * 50)) / 852,
+    color: colors.zinc[200],
+  },
   li: {
     marginVertical: 4,
     color: colors.zinc[700],

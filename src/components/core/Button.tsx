@@ -1,21 +1,25 @@
+import { button } from '@theme/button';
 import colors from '@theme/colors';
-import { text } from '@theme/text';
 import { ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 
 type Props = {
   title: string;
   isLoading?: boolean;
   onPress?: () => void;
+  variant?: 'solid' | 'outline';
 };
 
-const Button = ({ title, onPress, isLoading }: Props) => (
-  <TouchableOpacity onPress={onPress} className="px-6 py-4 bg-zinc-900 rounded-lg">
+const ActivityIndicatorColors = {
+  solid: colors.zinc[200],
+  outline: colors.zinc[900],
+};
+
+const Button = ({ title, onPress, isLoading, variant = 'solid' }: Props) => (
+  <TouchableOpacity onPress={onPress} className={button({ variant })}>
     {isLoading ? (
-      <ActivityIndicator color={colors.zinc[200]} />
+      <ActivityIndicator color={ActivityIndicatorColors[variant]} />
     ) : (
-      <Text className={text({ type: 'subtitle', isCenter: true, class: 'text-white' })}>
-        {title}
-      </Text>
+      <Text className={button({ title: variant })}>{title}</Text>
     )}
   </TouchableOpacity>
 );
