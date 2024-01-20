@@ -64,7 +64,7 @@ const WelcomeScreen = () => {
         />
         <View className="h-4" />
         <Button
-          variant="outline"
+          variant="secondary"
           title="Show Example Websites"
           onPress={() => setExampleWpSitesModalVisible(true)}
         />
