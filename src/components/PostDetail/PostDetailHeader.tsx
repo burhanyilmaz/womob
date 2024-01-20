@@ -1,6 +1,6 @@
 import colors from '@theme/colors';
 import { getHitSlop, width } from '@utils/helpers';
-import { ArrowLeft, Bookmark } from 'lucide-react-native';
+import { ArrowLeft, Bookmark, Share } from 'lucide-react-native';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 type Props = {
@@ -9,6 +9,7 @@ type Props = {
   headerImage?: string;
   onPressSave: () => void;
   onPressBack: () => void;
+  onPressShare: () => void;
 };
 
 const PostDetailHeader = ({
@@ -17,6 +18,7 @@ const PostDetailHeader = ({
   onPressSave,
   onPressBack,
   isSavedPost,
+  onPressShare,
 }: Props) => (
   <View className="w-full absolute overflow-hidden">
     <View
@@ -25,9 +27,17 @@ const PostDetailHeader = ({
       <Pressable onPress={onPressBack} hitSlop={getHitSlop({ value: 40 })}>
         <ArrowLeft className="text-zinc-50" />
       </Pressable>
-      <Pressable onPress={onPressSave} hitSlop={getHitSlop({ value: 40 })}>
-        <Bookmark className="text-zinc-50" fill={isSavedPost ? colors.zinc[50] : 'transparent'} />
-      </Pressable>
+      <View className="flex-row items-center justify-center">
+        <Pressable
+          onPress={onPressSave}
+          hitSlop={getHitSlop({ value: 20, right: 10 })}
+          className="mr-5">
+          <Bookmark className="text-zinc-50" fill={isSavedPost ? colors.zinc[50] : 'transparent'} />
+        </Pressable>
+        <Pressable onPress={onPressShare} hitSlop={getHitSlop({ value: 20, left: 10 })}>
+          <Share className="text-zinc-50" />
+        </Pressable>
+      </View>
     </View>
     <View style={styles.header} className="absolute bg-zinc-600 z-20 w-full opacity-50" />
     <Image resizeMode="cover" style={styles.header} source={{ uri: headerImage }} />

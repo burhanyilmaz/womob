@@ -5,6 +5,7 @@ import { Instance, flow, t } from 'mobx-state-tree';
 
 export const Post = t
   .model('Post', {
+    link: t.string,
     title: t.string,
     id: t.identifier,
     content: t.string,
@@ -69,6 +70,7 @@ const PostStore = t
       self.posts.set(
         post.id,
         Post.create({
+          link: post.link,
           id: post.id.toString(),
           content: post.content.rendered,
           mediaUrl: post?._links?.['wp:featuredmedia']?.[0]?.href || '',

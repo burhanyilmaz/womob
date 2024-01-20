@@ -9,7 +9,7 @@ import { text } from '@theme/text';
 import { width } from '@utils/helpers';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, InteractionManager, Text, View } from 'react-native';
+import { ActivityIndicator, InteractionManager, Share, Text, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -46,6 +46,14 @@ const PostDetailScreen = () => {
   });
 
   const onPressSave = () => post && savedStore.addPost(post);
+  const onPressShare = async () => {
+    post &&
+      Share.share({
+        url: post.link,
+        title: post.title,
+        message: `${post.title}\nsharing via WoMob`,
+      });
+  };
 
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => {
@@ -61,6 +69,7 @@ const PostDetailScreen = () => {
         topMargin={top}
         onPressBack={goBack}
         onPressSave={onPressSave}
+        onPressShare={onPressShare}
         headerImage={post?.headerImage}
         isSavedPost={savedStore.isSavedPost(post.id)}
       />

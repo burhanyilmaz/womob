@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     padding: 0,
     textAlign: 'left',
     left: (-1 * (width * 50)) / 852,
-    color: colors.zinc[200],
   },
   li: {
     marginVertical: 4,

@@ -13,6 +13,7 @@ export type MediaType = {
 
 export type ApiPostType = {
   id: string;
+  link: string;
   title: {
     rendered: string;
   };
