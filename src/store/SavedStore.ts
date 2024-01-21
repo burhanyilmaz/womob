@@ -32,6 +32,7 @@ const SavedStore = t
         post.id,
         Post.create({
           id: post.id,
+          link: post.link,
           title: post.title,
           image: post.image,
           content: post.content,
