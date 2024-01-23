@@ -13,7 +13,7 @@ type Props = {
 const SliderItem = ({ image, categoryName, title, onPress }: Props) => (
   <Pressable className="bg-white mb-4 pl-4" style={styles.sliderItemContainer} onPress={onPress}>
     <View
-      className="bg-zinc-100 overflow-hidden rounded-lg justify-end"
+      className="bg-zinc-50 overflow-hidden rounded-lg justify-end"
       style={{ height: SLIDER_ITEM_HEIGHT }}>
       <Image
         source={{ uri: image }}
