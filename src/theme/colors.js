@@ -1,6 +1,10 @@
 module.exports = {
   white: '#ffffff',
   black: '#000000',
+  'black-o': {
+    40: 'rgba(0,0,0,0.4)',
+    50: 'rgba(0,0,0,0.5)',
+  },
   zinc: {
     50: '#fafafa',
     100: '#f4f4f5',

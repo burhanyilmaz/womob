@@ -53,11 +53,14 @@ const PostStore = t
     loading: t.optional(t.boolean, false),
   })
   .views(self => ({
-    get fetchPosts() {
-      return Array.from(self.posts.values());
+    get listingPosts() {
+      return Array.from(self.posts.values()).slice(4, self.posts.size);
     },
     getSelectedPost(id: string) {
       return self.posts.get(id);
+    },
+    get sliderPosts() {
+      return Array.from(self.posts.values()).slice(0, 4);
     },
   }))
   .actions(self => ({
