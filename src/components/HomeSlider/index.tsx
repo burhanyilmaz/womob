@@ -46,7 +46,7 @@ const HomeSlider = ({ posts, onPressPost }: Props) => {
   );
 
   return (
-    <View>
+    <View className="mt-4">
       <FlatList
         horizontal
         pagingEnabled
