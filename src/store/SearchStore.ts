@@ -21,6 +21,7 @@ const SearchStore = t
       self.results.set(
         post.id,
         Post.create({
+          link: post.link,
           id: post.id.toString(),
           content: post.content.rendered,
           mediaUrl: post?._links?.['wp:featuredmedia']?.[0]?.href || '',
