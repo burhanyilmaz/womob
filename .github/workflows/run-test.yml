@@ -6,9 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
-        uses: actions/checkout@v4
-      - name: 🏗 Setup repo
-        uses: oven-sh/setup-bun@v1       
+        uses: actions/checkout@v4    
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
         with:
@@ -20,13 +18,13 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}    
       - name: 🚀 Install Packages
         run: |
-         bun install
+         yarn install
       - name: 🧪 Run format and lint
         run: |
-         bun format && bun validate
+         yarn format && yarn validate
       - name: 🧪 Run test
         run: |
-         bun test         
+         yarn test         
       # - name: Build apk
       #   run: |
       #    bun build:android:local  
