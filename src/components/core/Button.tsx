@@ -16,9 +16,9 @@ const ActivityIndicatorColors = {
 };
 
 const Button = ({ title, onPress, isLoading, variant = 'solid' }: Props) => (
-  <TouchableOpacity onPress={onPress} className={button({ variant })}>
+  <TouchableOpacity onPress={onPress} className={button({ variant })} accessibilityRole="button">
     {isLoading ? (
-      <ActivityIndicator color={ActivityIndicatorColors[variant]} />
+      <ActivityIndicator color={ActivityIndicatorColors[variant]} testID="buttonLoading" />
     ) : (
       <Text className={button({ title: variant })}>{title}</Text>
     )}
