@@ -6,7 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - name: 🏗 Setup repo
+        uses: oven-sh/setup-bun@v1       
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
         with:
@@ -22,14 +24,17 @@ jobs:
       - name: 🧪 Run format and lint
         run: |
          bun format && bun validate
-      - name: Build apk
+      - name: 🧪 Run test
         run: |
-         bun build:android:local  
-      - name: 🥳 Upload APK File
-        uses: actions/upload-artifact@v3
-        with:
-          name: womob-apk
-          path: ${{ github.workspace }}/*.apk 
+         bun test         
+      # - name: Build apk
+      #   run: |
+      #    bun build:android:local  
+      # - name: 🥳 Upload APK File
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: womob-apk
+      #     path: ${{ github.workspace }}/*.apk 
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
