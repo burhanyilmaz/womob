@@ -23,9 +23,11 @@ export const Post = t
       }
 
       const media = yield api.getMediaByUrl(self.mediaUrl);
+      const mediaSizes = media?.media_details;
+      const renderedMedia = media?.guid?.rendered;
 
-      self.image = media?.media_details?.sizes?.medium?.source_url || media?.guid?.rendered;
-      self.headerImage = media?.media_details?.sizes?.large?.source_url || media?.guid?.rendered;
+      self.image = mediaSizes?.medium?.source_url || renderedMedia;
+      self.headerImage = mediaSizes?.large?.source_url || renderedMedia;
       self.imageLoaded = true;
     }),
 
@@ -56,9 +58,11 @@ const PostStore = t
     get listingPosts() {
       return Array.from(self.posts.values()).slice(4, self.posts.size);
     },
+
     getSelectedPost(id: string) {
       return self.posts.get(id);
     },
+
     get sliderPosts() {
       return Array.from(self.posts.values()).slice(0, 4);
     },
@@ -94,7 +98,9 @@ const PostStore = t
       if (!self.url) {
         return;
       }
+
       this.setLoading(true);
+
       try {
         const posts = await api.getPost(self.page);
 

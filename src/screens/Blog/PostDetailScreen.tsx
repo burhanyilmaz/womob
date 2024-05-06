@@ -46,6 +46,7 @@ const PostDetailScreen = () => {
   });
 
   const onPressSave = () => post && savedStore.addPost(post);
+
   const onPressShare = async () => {
     post &&
       Share.share({
