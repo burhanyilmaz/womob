@@ -23,7 +23,7 @@ type Props = {
 const ExampleWpSites = ({ visible, onClose, onPressExampleWebsite }: Props) => (
   <Modal visible={visible} transparent animationType="none">
     <View className="flex-1 justify-end items-center" style={styles.overlay}>
-      <SafeAreaView className="w-full bg-zinc-100 rounded-t-xl ">
+      <SafeAreaView className="w-full bg-zinc-100 rounded-t-xl flex-1">
         <FlatList
           data={ExampleWPWebsites}
           renderItem={({ item }) => (
@@ -32,11 +32,9 @@ const ExampleWpSites = ({ visible, onClose, onPressExampleWebsite }: Props) => (
               className="mx-5 py-2 flex-row items-center justify-between border-b-0.5 border-zinc-500">
               <View className="flex-row items-center">
                 <Image
-                  source={{
-                    uri: item.image,
-                  }}
                   resizeMode="contain"
                   className="h-16 w-16 mr-4"
+                  source={{ uri: item.image }}
                 />
                 <Text className={text({ type: 'title4' })}>{item.name}</Text>
               </View>

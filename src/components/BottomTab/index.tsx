@@ -27,7 +27,7 @@ const BottomNavigation = ({ navigation, state }: BottomTabBarProps) => {
   const onPressNavigate = (screen: string) => () => navigation.navigate(screen);
 
   return (
-    <View className="border-t-b1 border-t-zinc-100 bg-zinc-50">
+    <View className="border-t-b1 border-t-zinc-100 bg-zinc-50 pb-2">
       <View
         className="pt-2 px-5 flex-row justify-between"
         style={{
