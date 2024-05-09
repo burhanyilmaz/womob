@@ -5,6 +5,10 @@
 
 This app utilizes the WordPress REST API. After clicking the convert button, your WordPress website will be transformed into a mobile app. Currently, there is only a blog template available.
 
+After adding your WordPress website URL, you will access your mobile app. This is not a web view. Some of the post content is web view (only iframe), others are not.
+
+We welcome contributions from everyone. We appreciate your help in making WoMob better!
+
 ## Intro Videos
 - Demo video shows you what the app can do in simple terms. [Demo Video](https://www.youtube.com/watch?v=1vto0uXtHTQ)
 
