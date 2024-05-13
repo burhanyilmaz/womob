@@ -3,11 +3,20 @@
 # WoMob - WordPress to Mobile App
 [![wakatime](https://wakatime.com/badge/github/burhanyilmaz/womob.svg)](https://wakatime.com/badge/github/burhanyilmaz/womob)
 
-This app utilizes the WordPress REST API. After clicking the convert button, your WordPress website will be transformed into a mobile app. Currently, there is only a blog template available.
+📱 Transform Your Website into a Mobile App with WoMob! 🚀
 
-After adding your WordPress website URL, you will access your mobile app. This is not a web view. Some of the post content is web view (only iframe), others are not.
+🔧 <b>Utilize the WordPress REST API:</b> Smoothly integrate your WordPress website into a mobile app environment.
 
-We welcome contributions from everyone. We appreciate your help in making WoMob better!
+🔄  <b>Easy Conversion Process:</b> With just a click of a button, your WordPress site converts into a functional mobile application.
+
+📝  <b>Blog Template Available:</b> Start with a  simple blog template to showcase your content on mobile devices.
+
+🌐  <b>Native Components:</b> All components are native without iframe content. Some post content includes an iframe element. App using web view for displaying part of this content.
+
+💬  <b>Get Started Today:</b> Simply add your WordPress website URL and gain access to your personalized mobile app. It's that easy!
+
+🙌  <b>Join the WoMob Community:</b> Join us in shaping the future of WoMob. Your input matters, and together, we can create something truly exceptional.
+
 
 ## Intro Videos
 - Demo video shows you what the app can do in simple terms. [Demo Video](https://www.youtube.com/watch?v=1vto0uXtHTQ)
@@ -18,14 +27,10 @@ git clone https://github.com/burhanyilmaz/womob
 
 yarn install || npm install
 
-// android
-yarn android
-
-// ios
-yarn ios
+yarn android || yarn ios
 
 // tests
-yarn jest
+yarn test
 
 If you have questions, please feel free to ask.
 ```
