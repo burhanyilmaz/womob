@@ -9,7 +9,14 @@ import colors from '@theme/colors';
 import { text } from '@theme/text';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
-import { ActivityIndicator, FlatList, ListRenderItem, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  Text,
+  View,
+  RefreshControl,
+} from 'react-native';
 
 const BlogHomeScreen = () => {
   const { navigate } = useNavigation<NavigationProp<BlogStackNavigatorParamList>>();
@@ -61,6 +68,14 @@ const BlogHomeScreen = () => {
         onEndReached={postStore.increasePage}
         ListHeaderComponent={RenderListHeader}
         ListEmptyComponent={<ActivityIndicator size="large" color={colors.zinc[600]} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={postStore.loading}
+            onRefresh={async () => {
+              await postStore.getPosts();
+            }}
+          />
+        }
       />
     </View>
   );
