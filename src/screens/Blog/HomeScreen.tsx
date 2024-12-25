@@ -9,7 +9,14 @@ import colors from '@theme/colors';
 import { text } from '@theme/text';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
-import { ActivityIndicator, FlatList, ListRenderItem, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
 
 const BlogHomeScreen = () => {
   const { navigate } = useNavigation<NavigationProp<BlogStackNavigatorParamList>>();
@@ -22,6 +29,19 @@ const BlogHomeScreen = () => {
     },
     [],
   );
+
+  const onEndReached = () => {
+    if (postStore.pullToRefresh) {
+      return;
+    }
+
+    postStore.increasePage();
+  };
+
+  const onRefresh = () => {
+    postStore.setPullToRefresh(true);
+    postStore.getPosts();
+  };
 
   const RenderItem: ListRenderItem<PostType> = ({ item: post }) => (
     <View className="px-5">
@@ -52,15 +72,17 @@ const BlogHomeScreen = () => {
       )}
       <FlatList
         windowSize={6}
-        key="blogHome"
         removeClippedSubviews
         initialNumToRender={6}
         maxToRenderPerBatch={6}
         renderItem={RenderItem}
+        onEndReached={onEndReached}
         data={postStore.listingPosts}
-        onEndReached={postStore.increasePage}
         ListHeaderComponent={RenderListHeader}
         ListEmptyComponent={<ActivityIndicator size="large" color={colors.zinc[600]} />}
+        refreshControl={
+          <RefreshControl refreshing={postStore.pullToRefresh} onRefresh={onRefresh} />
+        }
       />
     </View>
   );
