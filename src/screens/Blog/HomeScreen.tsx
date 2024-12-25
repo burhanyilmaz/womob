@@ -72,6 +72,8 @@ const BlogHomeScreen = () => {
           <RefreshControl
             refreshing={postStore.loading}
             onRefresh={async () => {
+              postStore.clearAll();
+              postStore.page = 1;
               await postStore.getPosts();
             }}
           />
