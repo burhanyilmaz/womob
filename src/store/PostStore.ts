@@ -1,6 +1,7 @@
 import { api } from '@services/Api';
 import { removeHtmlAndDecimalEntities } from '@utils/helpers';
 import { ApiPostType } from '@utils/types/BlogTypes';
+import { when } from 'mobx';
 import { Instance, flow, t } from 'mobx-state-tree';
 
 export const Post = t
@@ -53,6 +54,7 @@ const PostStore = t
     page: t.number,
     posts: t.map(Post),
     loading: t.optional(t.boolean, false),
+    pullToRefresh: t.optional(t.boolean, false),
   })
   .views(self => ({
     get listingPosts() {
@@ -94,15 +96,29 @@ const PostStore = t
       self.loading = loading;
     },
 
+    setPullToRefresh(pullToRefresh: boolean) {
+      self.pullToRefresh = pullToRefresh;
+    },
+
     async getPosts() {
       if (!self.url) {
         return;
       }
-
       this.setLoading(true);
 
       try {
+        if (self.pullToRefresh) {
+          self.page = 1;
+        }
         const posts = await api.getPost(self.page);
+
+        if (self.pullToRefresh) {
+          this.clearAll();
+
+          setTimeout(() => {
+            this.setPullToRefresh(false);
+          }, 1000);
+        }
 
         if (posts?.length > 0) {
           posts.forEach(this.addPost);
